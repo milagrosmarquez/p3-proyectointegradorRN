@@ -1,12 +1,26 @@
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack'; 
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
+
+import HomeMenu from "./src/components/HomeMenu/HomeMenu";
+import Login from "./src/screens/Login";
+import Register from "./src/screens/Register";
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+    <NavigationContainer>
+      <Stack.Navigator>
+
+        <Stack.Screen name="Login" component={Login} options={{headerShown: false}} />
+        <Stack.Screen name="Register" component={Register} options={{headerShown: false}} />
+        <Stack.Screen name="HomeMenu" component={HomeMenu} options={{headerShown: false}} /> 
+ 
+      </Stack.Navigator>
       <StatusBar style="auto" />
-    </View>
+    </NavigationContainer>
   );
 }
 
