@@ -5,7 +5,6 @@ import { View, Text, StyleSheet} from 'react-native';
 export default class Home extends Component {
   render() {
     return (  
-     
      <View style={styles.container}>
        <Text>Home</Text>
       </View>

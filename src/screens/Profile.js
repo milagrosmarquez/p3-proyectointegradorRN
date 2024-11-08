@@ -1,66 +1,69 @@
-import React, { Component } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity} from 'react-native';
-import { auth } from '../firebase/config';
-
+import React, { Component } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { auth, db } from "../firebase/config"
+import UserProfile from '../components/UserProfile/UserProfile';
 
 class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        user:{},
     };
   }
 
-  logout(){
-    auth.signOut()
-    this.props.navigation.navigate('Login')
-  }
-  
-  render() {
 
-    const { user } = this.state; 
+logout() {
+  auth.signOut();
+  this.props.navigation.navigate('Login');
+}
 
-    return (
-      <View style={styles.container}>
-      <Text style={styles.text}>Profile Screen</Text>
+render() {
+  const { user } = this.state;
 
-      <Text> {auth.currentUser.email} </Text>
-      <Text> Username </Text>
-      <Text> Bio </Text>
+  return (
+    <View style={styles.container}>
+      <UserProfile />
 
+      <View style={styles.userPosts}>
+        <Text style={styles.text}>Mis posts</Text>
+        <Text style={styles.text}>Crear nuevo post</Text>
 
-
-      
-      <Text style={styles.text}>Mis posts</Text>
-      <Text style={styles.text}>Crear nuevo posts</Text>
-
-
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => this.logout()} >
-        <Text style={styles.buttonText}>Desloguearse</Text>
-      </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => this.logout()}>
+          <Text style={styles.buttonText}>Salir</Text>
+        </TouchableOpacity>
+      </View>
     </View>
-    )
-  }
+  );
+}
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    backgroundColor: '#f5f5f5',
+    padding: 20,
     alignItems: 'center',
-    backgroundColor: '#f0f0f0',
   },
   text: {
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: 'bold',
+    color: '#5e2872',
+    marginBottom: 10,
+    textAlign: 'center',
+  },
+  userPosts: {
+    width: '100%',
+    alignItems: 'center',
+    marginTop: 20,
   },
   button: {
-    marginTop: 20,
-    padding: 10,
-    backgroundColor: 'red',
-    borderRadius: 5,
+    width: '40%',
+    paddingVertical: 10,
+    backgroundColor: '#9b4d96',
+    borderRadius: 8,
+    alignItems: 'center',
+    marginVertical: 10,
   },
   buttonText: {
     color: 'white',

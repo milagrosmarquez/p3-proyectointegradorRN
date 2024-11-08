@@ -13,6 +13,7 @@ class Register extends Component {
       errormsg: "",
       loading: false,
       bio: "",
+      loggedIn:false,
 
     };
   }
