@@ -23,7 +23,7 @@ class UserProfile extends Component {
             });
 
             const filteredUsers = users.filter(user => user.data.mail === auth.currentUser.email);
-            const user = filteredUsers.length > 0 ? filteredUsers[0].data : {}; 
+            const user = filteredUsers.length > 0 ? filteredUsers[0].data : {};
 
             this.setState({
                 users: users,
@@ -44,17 +44,17 @@ class UserProfile extends Component {
                     {loading ? (
                         <ActivityIndicator size='large' color='yellow' />
                     ) : (
-                        <>
+                        <><View style={styles.textContainer}>
                             <Image
                                 style={styles.image}
                                 source={require('../../../assets/userImage.png')}
                                 resizeMode='contain'
                             />
-                            <View style={styles.textContainer}>
-                                <Text style={styles.userInfoText}>{user.username}</Text>
-                                <Text style={styles.userInfoText}>{auth.currentUser.email}</Text>
-                                <Text style={styles.bio}>{user.bio}</Text>
-                            </View>
+
+                            <Text style={styles.userInfoText}>{user.username}</Text>
+                            <Text style={styles.userInfoText}>{auth.currentUser.email}</Text>
+                            <Text style={styles.bio}>{user.bio}</Text>
+                        </View>
                         </>
                     )}
 
@@ -69,26 +69,31 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'flex-start',
         alignItems: 'center',
-        backgroundColor: '#f5f5f5',
         padding: 20,
     },
     userInfo: {
         width: '100%',
         flexDirection: 'row',
-        padding: 20,
-        backgroundColor: '#d3aad7',
-        marginBottom: 20,
+        padding: 15,
+        paddingBottom: 20,
+        paddingTop: 20,
+        paddingLeft: 40,
+        paddingRight: 40,
+        backgroundColor: '#171617',
+        marginBottom: 30,
         borderRadius: 8,
         shadowColor: '#000',
         shadowOpacity: 0.1,
         shadowRadius: 5,
         alignItems: 'center',
+        justifyContent: 'center',
     },
     image: {
-        width: 50,
-        height: 50,
+        width: 70,
+        height: 70,
         marginRight: 10,
-        borderRadius: 25,
+        borderRadius: 40,
+        alignSelf: 'center',
     },
     textContainer: {
         flex: 1,
@@ -96,16 +101,17 @@ const styles = StyleSheet.create({
     userInfoText: {
         fontSize: 16,
         marginBottom: 10,
+        color: 'white',
     },
     text: {
         fontSize: 20,
         fontWeight: 'bold',
         marginBottom: 10,
-        color: '#9b4d96',
+        color: 'black',
     },
     bio: {
-        backgroundColor: '#f2d6f7',
-        padding: 10,
+        backgroundColor: '#ff91f4',
+        padding: 20,
         borderRadius: 8,
         marginTop: 10,
     }

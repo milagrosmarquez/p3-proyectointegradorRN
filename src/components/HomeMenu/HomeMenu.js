@@ -17,9 +17,9 @@ const HomeMenu = () => {
     options={{
         headerShown: false,
         tabBarIcon: ({ size }) => (
-            <FontAwesome name="user" size={size} color="white" />
+            <FontAwesome name="user" size={size} color="black" />
         ),
-        tabBarStyle: { backgroundColor: '#9b4d96' }, 
+        tabBarStyle: { backgroundColor: 'white' }, 
     }}
 />
 
@@ -29,9 +29,9 @@ const HomeMenu = () => {
     options={{
         headerShown: false,
         tabBarIcon: ({  size }) => (
-            <FontAwesome name="home" size={size} color="white" />
+            <FontAwesome name="home" size={size} color="black" />
         ),
-        tabBarStyle: { backgroundColor: '#9b4d96' }, 
+        tabBarStyle: { backgroundColor: 'white' }, 
     }}
 />
 

@@ -11,63 +11,87 @@ class Profile extends Component {
   }
 
 
-logout() {
-  auth.signOut();
-  this.props.navigation.navigate('Login');
-}
+  logout() {
+    auth.signOut();
+    this.props.navigation.navigate('Login');
+  }
 
-render() {
-  const { user } = this.state;
+  render() {
 
-  return (
-    <View style={styles.container}>
-      <UserProfile />
+    return (
+      <View style={styles.container}>
+        <UserProfile />
 
-      <View style={styles.userPosts}>
-        <Text style={styles.text}>Mis posts</Text>
-        <Text style={styles.text}>Crear nuevo post</Text>
+        <View style={styles.userPosts}>
+          <Text style={styles.text}>Mis posts</Text>
+          <Text style={styles.text}>Crear nuevo post</Text>
 
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => this.logout()}>
-          <Text style={styles.buttonText}>Salir</Text>
-        </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => this.logout()}>
+            <Text style={styles.buttonText}>Salir</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
-  );
-}
+    );
+  }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
-    padding: 20,
+    justifyContent: 'flex-start',
     alignItems: 'center',
+    backgroundColor: "#ffd7fd",
+    padding: 20,
+  },
+  userInfo: {
+    width: '100%',
+    flexDirection: 'row',
+    padding: 20,
+    backgroundColor: '#d3aad7',
+    marginBottom: 20,
+    borderRadius: 8,
+    shadowColor: '#000',
+    shadowOpacity: 0.1,
+    shadowRadius: 5,
+    alignItems: 'center',
+  },
+  image: {
+    width: 50,
+    height: 50,
+    marginRight: 10,
+    borderRadius: 25,
+  },
+  textContainer: {
+    flex: 1,
+  },
+  userInfoText: {
+    fontSize: 16,
+    marginBottom: 10,
   },
   text: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#5e2872',
     marginBottom: 10,
+    color: 'black',
     textAlign: 'center',
   },
-  userPosts: {
-    width: '100%',
-    alignItems: 'center',
-    marginTop: 20,
-  },
   button: {
-    width: '40%',
-    paddingVertical: 10,
-    backgroundColor: '#9b4d96',
-    borderRadius: 8,
+    width: 150,
+    height: 45,
+    borderRadius: 45,
+    borderWidth: 3,
+    borderColor: 'rgba(255, 150, 200, 1)',
+    backgroundColor: 'rgba(255, 182, 193, 1)',
+    display: 'flex',
     alignItems: 'center',
-    marginVertical: 10,
+    justifyContent: 'center',
   },
   buttonText: {
-    color: 'white',
+    color: 'black',
     fontSize: 16,
+    fontWeight: 'bold',
   },
 });
 

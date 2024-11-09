@@ -13,7 +13,7 @@ class Register extends Component {
       errormsg: "",
       loading: false,
       bio: "",
-      loggedIn:false,
+      loggedIn: false,
 
     };
   }
@@ -25,6 +25,8 @@ class Register extends Component {
     console.log("Password:", password);
   }
 
+
+  
   handleSubmit(email, password, bio, username) {
     this.setState({ loading: true, errormsg: '' });
     this.onSubmit();
@@ -130,76 +132,76 @@ class Register extends Component {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#e5c3f3',
-      },
-      heading: {
-        fontSize: 30,
-        fontWeight: '700',
-        color: '#9b4d96',
-        margin: 10,
-        fontFamily: 'PT Serif',
-      },
-      description: {
-        fontSize: 18,
-        marginBottom: 20,
-        marginTop: 15,
-        color: '#9b4d96',
-        textAlign: 'center',
-      },
-      paragraph: {
-        fontSize: 16,
-        color: '#9b4d96',
-        marginTop: 10,
-      },
-      input: {
-        width: '70%',
-        padding: 12,
-        textAlign: 'center',
-        marginVertical: 10,
-        borderWidth: 2.5,
-        backgroundColor: '#f2d6f7',
-        borderColor: '#9b4d96',
-        borderRadius: 8,
-        fontFamily: 'Average Sans',
-        color: '#9b4d96',
-      },
-      button: {
-        width: '70%',
-        paddingVertical: 10,
-        backgroundColor: '#9b4d96',
-        borderRadius: 8,
-        alignItems: 'center',
-        marginVertical: 10,
-      },
-      buttonText: {
-        color: '#FFFFFF',
-        fontSize: 18,
-        fontWeight: '600',
-      },
-      buttonSecondary: {
-        width: '70%',
-        paddingVertical: 10,
-        backgroundColor: '#f2d6f7',
-        borderRadius: 8,
-        borderWidth: 2.5,
-        borderColor: '#9b4d96',
-        alignItems: 'center',
-        marginVertical: 10,
-      },
-      buttonSecondaryText: {
-        color: '#9b4d96',
-        fontSize: 16,
-        fontWeight: '600',
-      },
-      error: {
-        color: "white",
-        margin: 20,
-      },
-    
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#e5c3f3',
+  },
+  heading: {
+    fontSize: 30,
+    fontWeight: '700',
+    color: '#9b4d96',
+    margin: 10,
+    fontFamily: 'PT Serif',
+  },
+  description: {
+    fontSize: 18,
+    marginBottom: 20,
+    marginTop: 15,
+    color: '#9b4d96',
+    textAlign: 'center',
+  },
+  paragraph: {
+    fontSize: 16,
+    color: '#9b4d96',
+    marginTop: 10,
+  },
+  input: {
+    width: '70%',
+    padding: 12,
+    textAlign: 'center',
+    marginVertical: 10,
+    borderWidth: 2.5,
+    backgroundColor: '#f2d6f7',
+    borderColor: '#9b4d96',
+    borderRadius: 8,
+    fontFamily: 'Average Sans',
+    color: '#9b4d96',
+  },
+  button: {
+    width: '70%',
+    paddingVertical: 10,
+    backgroundColor: '#9b4d96',
+    borderRadius: 8,
+    alignItems: 'center',
+    marginVertical: 10,
+  },
+  buttonText: {
+    color: '#FFFFFF',
+    fontSize: 18,
+    fontWeight: '600',
+  },
+  buttonSecondary: {
+    width: '70%',
+    paddingVertical: 10,
+    backgroundColor: '#f2d6f7',
+    borderRadius: 8,
+    borderWidth: 2.5,
+    borderColor: '#9b4d96',
+    alignItems: 'center',
+    marginVertical: 10,
+  },
+  buttonSecondaryText: {
+    color: '#9b4d96',
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  error: {
+    color: "white",
+    margin: 20,
+  },
+
 });
 
 export default Register;
