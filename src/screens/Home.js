@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet} from 'react-native';
+import Users from '../components/Users/Users';
+
 
 
 export default class Home extends Component {
@@ -7,6 +9,8 @@ export default class Home extends Component {
     return (  
      <View style={styles.container}>
        <Text>Home</Text>
+      <Users></Users>
+
       </View>
 
     );
