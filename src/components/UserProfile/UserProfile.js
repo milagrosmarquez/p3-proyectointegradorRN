@@ -38,7 +38,7 @@ class UserProfile extends Component {
 
         return (
             <View style={styles.container}>
-                <Text style={styles.text}>Mi perfil</Text>
+
                 <View style={styles.userInfo}>
 
                     {loading ? (

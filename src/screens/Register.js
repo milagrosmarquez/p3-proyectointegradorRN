@@ -73,7 +73,7 @@ class Register extends Component {
     const { email, password, username, loading, bio } = this.state;
 
     return (
-      <View style={styles.container}>
+      <View style={styles.container}>2
         <Text style={styles.heading}>Registro</Text>
         <Text style={styles.description}>Creá tu cuenta</Text>
 
@@ -121,11 +121,6 @@ class Register extends Component {
           onPress={() => this.props.navigation.navigate('Login')}>
           <Text style={styles.description}>Ya tengo una cuenta</Text>
         </TouchableOpacity>
-
-        <Text>{email} </Text>
-        <Text>{password} </Text>
-        <Text>{username} </Text>
-        <Text>{bio} </Text>
       </View>
     );
   }

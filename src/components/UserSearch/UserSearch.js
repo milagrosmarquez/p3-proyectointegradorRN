@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, FlatList, TextInput, ActivityIndicator } from 'react-native';
 import { auth, db } from "../../firebase/config";
 
-class Users extends Component {
+class UserSearch extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -130,4 +130,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Users;
+export default UserSearch;

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { auth, db } from "../firebase/config"
+import { auth } from "../firebase/config"
 import UserProfile from '../components/UserProfile/UserProfile';
 
 class Profile extends Component {
@@ -9,7 +9,6 @@ class Profile extends Component {
     this.state = {
     };
   }
-
 
   logout() {
     auth.signOut();
@@ -20,11 +19,14 @@ class Profile extends Component {
 
     return (
       <View style={styles.container}>
+        
+        <Text style={styles.text}>Mi perfil</Text>
         <UserProfile />
 
         <View style={styles.userPosts}>
-          <Text style={styles.text}>Mis posts</Text>
+
           <Text style={styles.text}>Crear nuevo post</Text>
+          <Text style={styles.text}>Mis posts</Text>       
 
           <TouchableOpacity
             style={styles.button}

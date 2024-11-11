@@ -1,8 +1,5 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet } from 'react-native';
-import Users from '../components/Users/Users';
-
-
 
 export default class Home extends Component {
   render() {
@@ -10,8 +7,7 @@ export default class Home extends Component {
     return (
      
      <View style={styles.container}>
-        <Text>Home</Text>
-        <Users></Users>
+        <Text  style={styles.text} >Home</Text>
       </View>
 
     );
@@ -26,4 +22,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#f8ff75",
     padding: 20,
   },
+  text: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    color: 'black',
+},
 });

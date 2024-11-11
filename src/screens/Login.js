@@ -10,7 +10,6 @@ class Login extends Component {
       email: "",
       loggedIn: false,
       errormsg: "",
-      id: "",
     };
   }
 
@@ -18,7 +17,7 @@ class Login extends Component {
     auth.onAuthStateChanged(user => {
       if (user) {
         this.setState({ loggedIn: true });
-        console.log(user);
+        this.props.navigation.navigate('HomeMenu');
       }
     });
   }
@@ -36,7 +35,7 @@ class Login extends Component {
     this.onSubmit();
     auth.signInWithEmailAndPassword(email, password)
       .then((response) => {
-        this.setState({ loggedIn: true, errormsg: '', id: response.user.uid });
+        this.setState({ loggedIn: true, errormsg: '' });
       })
       .catch((error) => {
         this.setState({ errormsg: error.message });
@@ -44,15 +43,9 @@ class Login extends Component {
   }
 
 
-
-
   render() {
-    const { email, password, loggedIn, errormsg } = this.state;
-    if (loggedIn) {
-      this.props.navigation.navigate('HomeMenu');
-      return null;
-    }
-
+    const { email, password,  errormsg } = this.state;
+   
 
     return (
       <View style={styles.container}>
