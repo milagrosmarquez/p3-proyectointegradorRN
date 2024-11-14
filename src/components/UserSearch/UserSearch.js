@@ -46,8 +46,8 @@ class UserSearch extends Component {
     };
 
     render() {
-        const { usersDb, loading, filteredUsers, filterValue, filterApplied } = this.state;
-    
+        const { usersDb, loading, filteredUsers, filterValue } = this.state;
+
         return (
             <View style={styles.container}>
                 {loading ? (
@@ -60,28 +60,27 @@ class UserSearch extends Component {
                             value={filterValue}
                             onChangeText={this.handleFilter}
                         />
-    
-                        {filterValue === "" ? null : (
-                            filterApplied && filteredUsers.length === 0 ? (
-                                <Text style={styles.noResults}>No existen usuarios para este filtro</Text>
-                            ) : (
-                                <FlatList
-                                    data={filteredUsers.length > 0 ? filteredUsers : usersDb}
-                                    keyExtractor={(item) => item.id}
-                                    renderItem={({ item }) => (
-                                        <View style={styles.userInfo}>
-                                            <Text style={styles.userInfoText}>{item.data.username}</Text>
-                                            <Text style={styles.userInfoText}>{item.data.mail}</Text>
-                                        </View>
-                                    )}
-                                />
-                            )
+
+                        {filterValue !== "" && filteredUsers.length === 0 && (
+                            <Text style={styles.noResults}>No existen usuarios para este filtro</Text>
                         )}
+
+                        <FlatList
+                            data={filterValue === "" ? usersDb : filteredUsers}
+                            keyExtractor={(item) => item.id}
+                            renderItem={({ item }) => (
+                                <View style={styles.userInfo}>
+                                    <Text style={styles.userInfoText}>{item.data.username}</Text>
+                                    <Text style={styles.userInfoText}>{item.data.mail}</Text>
+                                </View>
+                            )}
+                        />
                     </>
                 )}
             </View>
         );
-    } }
+    }
+}
 
 const styles = StyleSheet.create({
     container: {

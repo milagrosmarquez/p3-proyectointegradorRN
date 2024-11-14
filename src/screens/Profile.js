@@ -1,13 +1,37 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { auth } from "../firebase/config"
+import { View, Text, StyleSheet, TouchableOpacity, FlatList, ActivityIndicator } from 'react-native';
+import { auth, db } from "../firebase/config"
 import UserProfile from '../components/UserProfile/UserProfile';
+import Post from '../components/Post/Post';
 
 class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      posts: [],
+      loading: true,
     };
+  }
+
+  componentDidMount() {
+    this.setState({ loading: true });
+    db.collection("posts")
+      .where("owner", "==", auth.currentUser.email)
+      .onSnapshot((docs) => {
+        let posts = [];
+        docs.forEach((doc) => {
+          posts.push({
+            id: doc.id,
+            data: doc.data(),
+          });
+        });
+        posts.sort((a, b) => b.data.createdAt - a.data.createdAt);
+
+        this.setState({
+          posts: posts,
+          loading: false,
+        });
+      });
   }
 
   logout() {
@@ -15,18 +39,32 @@ class Profile extends Component {
     this.props.navigation.navigate('Login');
   }
 
+
+
   render() {
 
+    const { loading, posts } = this.state;
+
     return (
+
       <View style={styles.container}>
-        
         <Text style={styles.text}>Mi perfil</Text>
-        <UserProfile />
+        <UserProfile posts={posts} />
 
         <View style={styles.userPosts}>
+          <Text style={styles.text}>Mis posts</Text>
 
-          <Text style={styles.text}>Crear nuevo post</Text>
-          <Text style={styles.text}>Mis posts</Text>       
+
+          {loading ? (
+            <ActivityIndicator size="large" color="yellow" />
+          ) : (
+            <FlatList
+              data={posts}
+              keyExtractor={(post) => post.id}
+              renderItem={({ item }) => <Post item={item} />}
+              contentContainerStyle={styles.postsList}
+            />
+          )}
 
           <TouchableOpacity
             style={styles.button}
@@ -34,6 +72,7 @@ class Profile extends Component {
             <Text style={styles.buttonText}>Salir</Text>
           </TouchableOpacity>
         </View>
+
       </View>
     );
   }

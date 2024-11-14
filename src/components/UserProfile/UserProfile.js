@@ -54,6 +54,7 @@ class UserProfile extends Component {
                             <Text style={styles.userInfoText}>{user.username}</Text>
                             <Text style={styles.userInfoText}>{auth.currentUser.email}</Text>
                             <Text style={styles.bio}>{user.bio}</Text>
+                            <Text style={styles.posts}>Cantidad de posts: {this.props.posts.length} </Text>
                         </View>
                         </>
                     )}
@@ -102,6 +103,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         marginBottom: 10,
         color: 'white',
+        padding: 5,
     },
     text: {
         fontSize: 20,
@@ -114,6 +116,13 @@ const styles = StyleSheet.create({
         padding: 20,
         borderRadius: 8,
         marginTop: 10,
+    },
+    posts:{
+        fontSize: 16,
+        marginBottom: 10,
+        color: 'white',
+        padding: 5,
+        paddingTop: 15,
     }
 });
 

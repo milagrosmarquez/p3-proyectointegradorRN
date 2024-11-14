@@ -26,6 +26,14 @@ class Register extends Component {
   }
 
 
+  componentDidMount() {
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        this.props.navigation.navigate('HomeMenu');
+      }
+    });
+  }
+
   
   handleSubmit(email, password, bio, username) {
     this.setState({ loading: true, errormsg: '' });
@@ -73,7 +81,7 @@ class Register extends Component {
     const { email, password, username, loading, bio } = this.state;
 
     return (
-      <View style={styles.container}>2
+      <View style={styles.container}>
         <Text style={styles.heading}>Registro</Text>
         <Text style={styles.description}>Creá tu cuenta</Text>
 

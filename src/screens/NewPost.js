@@ -1,66 +1,63 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
+import { db, auth } from "../firebase/config";
 
 class NewPost extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       postText: "",
-      error: ""
-    };
+      error: "",
+    }
   }
 
-
-
   handlePost = () => {
-    const { postText, error } = this.state;
+    const { postText } = this.state;
 
     if (postText === "") {
-      this.setState({ error: "Escribir un mensaje" })
+      this.setState({ error: "Escribe un mensaje" });
+      return;
     }
 
     db.collection("posts")
       .add({
         message: postText,
-        email: auth.currentUser.email,
+        owner: auth.currentUser.email,
         createdAt: Date.now(),
+        likes: [],
       })
       .then(() => {
-        this.setState({ postText: "" });
-        console.log('se subió el post')
+        this.setState({ postText: "", error: "" });
+        console.log('Se subió el post');
         this.props.navigation.navigate("Home");
       })
       .catch((error) => {
         console.error("Error al crear post: ", error);
       });
   };
-  
-
-
-
-
 
   render() {
-    const { postText } = this.state;
+    const { postText, error } = this.state;
 
     return (
       <View style={styles.container}>
-        <Text style={styles.text} >New Post</Text>
+        <Text style={styles.text}>Nuevo Post</Text>
         <View style={styles.formPost}>
           <TextInput
             style={styles.input}
             placeholder="Escribir aquí"
             value={postText}
-            onChangeText={text => this.setState({ postText: text })}
+            onChangeText={(text) => this.setState({ postText: text })}
           />
 
-          <TouchableOpacity style={styles.button}
-            onPress={() => this.handlePost(postText)}>
+          {error ? <Text style={styles.errorText}>{error}</Text> : null}
+
+          <TouchableOpacity style={styles.button} onPress={this.handlePost}>
             <Text style={styles.buttonText}>Agregar</Text>
           </TouchableOpacity>
         </View>
       </View>
-    )
+    );
   }
 }
 
@@ -89,6 +86,7 @@ const styles = StyleSheet.create({
     padding: 20,
     borderRadius: 8,
     marginTop: 10,
+    width: '100%',
   },
   button: {
     width: 150,
@@ -112,6 +110,11 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 10,
     color: 'black',
+  },
+  errorText: {
+    color: 'red',
+    fontSize: 14,
+    marginBottom: 10,
   },
 });
 
