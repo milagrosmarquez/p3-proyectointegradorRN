@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { TouchableOpacity } from 'react-native';
-import { View, Text, StyleSheet, TextInput, ActivityIndicator } from 'react-native';
+import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
 import { db, auth } from "../../firebase/config";
 import firebase from "firebase/app";
 
@@ -11,6 +11,8 @@ class Post extends Component {
         this.state = {
             like: false,
             cantidad: this.props.item.data.likes.length,
+            loading: false,
+            error:"", 
         };
     }
 
@@ -23,19 +25,37 @@ class Post extends Component {
     }
 
 
+    handleDelete() {
+        this.setState({ loading: true });
+        db.collection("posts").doc(this.props.item.id).delete()
+            .then(() => {
+                console.log('Post eliminado con éxito');
+                this.props.onDelete(this.props.item.id);
+                this.setState({ loading: false });
+            })
+            .catch((error) => {
+                this.setState({
+                    error: "Error al eliminar el post.", loading: false
+                  });
+            
+            });
+    }
+
     handleLike() {
         db.collection("posts").doc(this.props.item.id).update({
-            likes: firebase.firestore.FieldValue.arrayUnion(this.props.item.data.owner)
+            likes: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.email)
         })
             .then(() => this.setState({
                 like: true,
                 cantidad: this.props.item.data.likes.length,
-            }));
+                
+            })
+         );
     }
 
     handleUnlike() {
         db.collection("posts").doc(this.props.item.id).update({
-            likes: firebase.firestore.FieldValue.arrayRemove(this.props.item.data.owner)
+            likes: firebase.firestore.FieldValue.arrayRemove(auth.currentUser.email)
         })
             .then(() => this.setState({
                 like: false,
@@ -44,21 +64,35 @@ class Post extends Component {
     }
 
     render() {
+
+        const { cantidad, loading } = this.state;
+
         return (
             <View style={styles.container}>
                 <Text style={styles.message}>{this.props.item.data.message}</Text>
                 <Text style={styles.info}>{this.props.item.data.owner}</Text>
 
-                {this.state.like ? (
-                    <TouchableOpacity onPress={() => this.handleUnlike()}>
-                        <Text style={styles.button}>Ya no me gusta</Text>
-                    </TouchableOpacity>
+                <View style={styles.likeContainer}>
+                    {this.state.like ? (
+                        <TouchableOpacity onPress={() => this.handleUnlike()}>
+                            <Text style={styles.button}>Ya no me gusta</Text>
+                        </TouchableOpacity>
+                    ) : (
+                        <TouchableOpacity onPress={() => this.handleLike()}>
+                            <Text style={styles.button}>Me gusta </Text>
+                        </TouchableOpacity>
+                    )}
+                    <Text style={styles.likes}>Likes: {cantidad}</Text>
+                </View>
+                {loading ? (
+                    <ActivityIndicator size="small" color="blue" style={styles.loading} />
                 ) : (
-                    <TouchableOpacity onPress={() => this.handleLike()}>
-                        <Text style={styles.button}>Me gusta </Text>
-                    </TouchableOpacity> 
+                    this.props.item.data.owner === auth.currentUser.email && (
+                        <TouchableOpacity onPress={() => this.handleDelete()}>
+                            <Text style={styles.buttonDelete}>Eliminar</Text>
+                        </TouchableOpacity>
+                    )
                 )}
-                <Text style={styles.info}>Likes: {this.state.cantidad}</Text>
             </View>
         );
     }
@@ -85,24 +119,51 @@ const styles = StyleSheet.create({
         width: '100%',
     },
     info: {
-        padding: 10,
+        paddingTop: 20,
         fontSize: 16,
         color: 'black',
         marginBottom: 8,
         width: '100%',
     },
+    buttonDelete: {
+        paddingVertical: 7,
+        paddingHorizontal: 25,
+        backgroundColor: '#2e2e2e',
+        color: 'white',
+        fontSize: 16,
+        fontWeight: 'bold',
+        borderRadius: 25,
+        marginTop: 10,
+        alignSelf: 'flex-start',
+        shadowColor: '#000',
+    },
     button: {
         paddingVertical: 7,
         paddingHorizontal: 25,
-        backgroundColor: '#2e2e2e',  
-        color: 'white',               
+        backgroundColor: '#a29b08',
+        color: 'white',
         fontSize: 16,
         fontWeight: 'bold',
-        borderRadius: 25,            
+        borderRadius: 25,
+
         marginTop: 10,
-        alignSelf: 'flex-start',    
-        shadowColor: '#000',         
+        alignSelf: 'flex-start',
+        shadowColor: '#000',
     },
+    likeContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        width: '100%',
+        marginTop: 10,
+    },
+    likes: {
+        fontSize: 16,
+        color: 'black',
+        marginLeft: 10,
+        textAlign: 'center',
+        flex: 1,
+    }
 });
 
 export default Post;

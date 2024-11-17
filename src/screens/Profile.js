@@ -10,10 +10,20 @@ class Profile extends Component {
     this.state = {
       posts: [],
       loading: true,
+      loggedIn: true,
     };
   }
 
+
   componentDidMount() {
+
+    auth.onAuthStateChanged(user => {
+      if (!user) {
+        this.setState({ loggedIn: false });
+        this.props.navigation.navigate('Login');
+      }
+    });
+
     this.setState({ loading: true });
     db.collection("posts")
       .where("owner", "==", auth.currentUser.email)
@@ -47,15 +57,18 @@ class Profile extends Component {
 
     return (
 
-      <View style={styles.container}>
+
+      <View style={styles.containerUser}>
         <Text style={styles.text}>Mi perfil</Text>
+
         <UserProfile posts={posts} />
 
-        <View style={styles.userPosts}>
+        <View style={styles.containerPost}>
           <Text style={styles.text}>Mis posts</Text>
 
-
-          {loading ? (
+          {posts.length === 0 ? (
+            <Text style={styles.noResults}>Aún no hay publicaciones</Text>
+          ) : loading ? (
             <ActivityIndicator size="large" color="yellow" />
           ) : (
             <FlatList
@@ -65,25 +78,37 @@ class Profile extends Component {
               contentContainerStyle={styles.postsList}
             />
           )}
-
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => this.logout()}>
-            <Text style={styles.buttonText}>Salir</Text>
-          </TouchableOpacity>
         </View>
 
+
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => this.logout()}>
+          <Text style={styles.buttonText}>Salir</Text>
+        </TouchableOpacity>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
+  containerUser: {
     flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'center',
-    backgroundColor: "#ffd7fd",
+    backgroundColor: "#ff91f4",
+    padding: 20,
+  },
+  noResults: {
+    fontSize: 16,
+    color: '#555',
+    marginTop: 20,
+  },
+  containerPost: {
+    flex: 2,
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    backgroundColor: "#ff91f4",
     padding: 20,
   },
   userInfo: {
@@ -113,6 +138,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 20,
+    paddingBottom: 10,
     fontWeight: 'bold',
     marginBottom: 10,
     color: 'black',
@@ -123,8 +149,8 @@ const styles = StyleSheet.create({
     height: 45,
     borderRadius: 45,
     borderWidth: 3,
-    borderColor: 'rgba(255, 150, 200, 1)',
-    backgroundColor: 'rgba(255, 182, 193, 1)',
+    borderColor: '#db2dca',
+    backgroundColor: '#ee7be2',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',

@@ -24,6 +24,7 @@ export default class Home extends Component {
           data: doc.data(),
         });
       });
+   
       console.log(posts)
       this.setState({
         posts: posts,
@@ -61,6 +62,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 20,
     fontWeight: 'bold',
+    paddingBottom: 10,
     marginBottom: 10,
     color: 'black',
   },

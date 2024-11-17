@@ -37,7 +37,6 @@ class UserProfile extends Component {
         const { user, loading } = this.state;
 
         return (
-            <View style={styles.container}>
 
                 <View style={styles.userInfo}>
 
@@ -60,7 +59,6 @@ class UserProfile extends Component {
                     )}
 
                 </View>
-            </View>
         );
     }
 }
@@ -73,7 +71,7 @@ const styles = StyleSheet.create({
         padding: 20,
     },
     userInfo: {
-        width: '100%',
+        width: '92%',
         flexDirection: 'row',
         padding: 15,
         paddingBottom: 20,
@@ -110,9 +108,10 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginBottom: 10,
         color: 'black',
+        paddingBottom: 10,
     },
     bio: {
-        backgroundColor: '#ff91f4',
+        backgroundColor: '#fccaf7',
         padding: 20,
         borderRadius: 8,
         marginTop: 10,

@@ -34,7 +34,7 @@ class Register extends Component {
     });
   }
 
-  
+
   handleSubmit(email, password, bio, username) {
     this.setState({ loading: true, errormsg: '' });
     this.onSubmit();

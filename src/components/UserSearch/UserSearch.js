@@ -10,7 +10,7 @@ class UserSearch extends Component {
             filteredUsers: [],
             filterValue: "",
             loading: true,
-            filterApplied: false,
+            error: "", 
         };
     }
 
@@ -29,8 +29,17 @@ class UserSearch extends Component {
             this.setState({
                 usersDb: usersDb,
                 loading: false,
+                error: "",  
             });
-        });
+        },
+        (error) => {
+            this.setState({
+                loading: false,
+                error: "Error al cargar los usuarios",
+            });
+        }
+    
+    );
     }
 
     handleFilter = (text) => {
@@ -46,14 +55,15 @@ class UserSearch extends Component {
     };
 
     render() {
-        const { usersDb, loading, filteredUsers, filterValue } = this.state;
+        const { usersDb, loading, filteredUsers, filterValue, error } = this.state;
 
         return (
             <View style={styles.container}>
                 {loading ? (
-                    <ActivityIndicator size="large" color="#6c63ff" />
+                    <ActivityIndicator size="large" color="yellow" />
                 ) : (
                     <>
+                      {error !== "" && <Text style={styles.noResults}>{error}</Text>}
                         <TextInput
                             style={styles.searchInput}
                             placeholder="Buscar usuario"
