@@ -29,7 +29,6 @@ class Post extends Component {
         this.setState({ loading: true });
         db.collection("posts").doc(this.props.item.id).delete()
             .then(() => {
-                console.log('Post eliminado con éxito');
                 this.props.onDelete(this.props.item.id);
                 this.setState({ loading: false });
             })

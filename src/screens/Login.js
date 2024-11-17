@@ -23,16 +23,7 @@ class Login extends Component {
   }
 
 
-  onSubmit = () => {
-    const { email, password } = this.state;
-    console.log("Email:", email);
-    console.log("Password:", password);
-  }
-
-
-
   handleSubmit(email, password) {
-    this.onSubmit();
     auth.signInWithEmailAndPassword(email, password)
       .then((response) => {
         this.setState({ loggedIn: true, errormsg: '' });

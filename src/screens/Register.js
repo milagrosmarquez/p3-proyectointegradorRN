@@ -18,18 +18,10 @@ class Register extends Component {
     };
   }
 
-  onSubmit = () => {
-    const { email, username, password } = this.state;
-    console.log("Email:", email);
-    console.log("Username:", username);
-    console.log("Password:", password);
-  }
-
-
   componentDidMount() {
     auth.onAuthStateChanged(user => {
       if (user) {
-        this.props.navigation.navigate('HomeMenu');
+        this.props.navigation.navigate('Login');
       }
     });
   }
@@ -37,7 +29,6 @@ class Register extends Component {
 
   handleSubmit(email, password, bio, username) {
     this.setState({ loading: true, errormsg: '' });
-    this.onSubmit();
 
     if (!password) {
       this.setState({
@@ -66,10 +57,9 @@ class Register extends Component {
             username: username,
           })
             .then(() => {
-              this.setState({ registered: true, errormsg: '', loading: false })
+              this.setState({ registered: true, errormsg: '', loading: false });
               this.props.navigation.navigate("Login")
-            })
-            .catch(e => console.log(e.message));
+            });
         }
       })
       .catch((error) => this.setState({ errormsg: error.message, loading: false }));
@@ -94,7 +84,7 @@ class Register extends Component {
         />
         <TextInput
           style={styles.input}
-          placeholder="User Name"
+          placeholder="Username"
           onChangeText={text => this.setState({ username: text })}
           value={username}
         />
@@ -121,7 +111,7 @@ class Register extends Component {
           <Text style={styles.buttonText}>Registrate</Text>
         </TouchableOpacity>
 
-        {loading && <ActivityIndicator size="large" color="green" />}
+        {loading && <ActivityIndicator size="large" color="yellow" />}
         {this.state.errormsg && <Text style={styles.error}>{this.state.errormsg} </Text>}
 
 
@@ -201,7 +191,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   error: {
-    color: "white",
+    color: "black",
     margin: 20,
   },
 
