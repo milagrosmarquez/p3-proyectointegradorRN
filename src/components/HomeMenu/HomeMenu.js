@@ -10,22 +10,35 @@ import { auth } from "../../firebase/config";
 const Tab = createBottomTabNavigator();
 
 class HomeMenu extends Component {
-constructor(props){
-    super(props);
-}
+    constructor(props) {
+        super(props);
+    }
 
     componentDidMount() {
         auth.onAuthStateChanged(user => {
-          if (!user) {
-            this.props.navigation.navigate('Login');
-          }
+            if (!user) {
+                this.props.navigation.navigate('Login');
+            }
         });
-      }
+    }
 
 
     render() {
         return (
             <Tab.Navigator screenOptions={{ tabBarShowLabel: false }}>
+
+                <Tab.Screen
+                    name="Home"
+                    component={Home}
+                    options={{
+                        headerShown: false,
+                        tabBarIcon: ({ size }) => (
+                            <FontAwesome name="home" size={size} color="black" />
+                        ),
+                        tabBarStyle: { backgroundColor: 'white' },
+                    }}
+                />
+
 
                 <Tab.Screen
                     name="Profile"
@@ -39,17 +52,6 @@ constructor(props){
                     }}
                 />
 
-                <Tab.Screen
-                    name="Home"
-                    component={Home}
-                    options={{
-                        headerShown: false,
-                        tabBarIcon: ({ size }) => (
-                            <FontAwesome name="home" size={size} color="black" />
-                        ),
-                        tabBarStyle: { backgroundColor: 'white' },
-                    }}
-                />
 
                 <Tab.Screen
                     name="Users"

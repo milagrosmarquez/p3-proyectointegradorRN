@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
   },
   noResults: {
     fontSize: 16,
-    color: '#555',
+    color: 'black',
     marginTop: 20,
   },
   containerPost: {

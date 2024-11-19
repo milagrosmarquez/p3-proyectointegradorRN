@@ -13,23 +13,21 @@ class Register extends Component {
       errormsg: "",
       loading: false,
       bio: "",
-      loggedIn: false,
-
     };
   }
+
 
   componentDidMount() {
     auth.onAuthStateChanged(user => {
       if (user) {
-        this.props.navigation.navigate('Login');
+        this.props.navigation.navigate('HomeMenu');
       }
     });
   }
 
-
   handleSubmit(email, password, bio, username) {
     this.setState({ loading: true, errormsg: '' });
-
+  
     if (!password) {
       this.setState({
         errormsg: "Completar password "
@@ -57,8 +55,9 @@ class Register extends Component {
             username: username,
           })
             .then(() => {
+              
               this.setState({ registered: true, errormsg: '', loading: false });
-              this.props.navigation.navigate("Login")
+              this.props.navigation.navigate('Login')
             });
         }
       })
