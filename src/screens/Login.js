@@ -79,6 +79,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#b3baff',
+    minHeight: '100%',
   },
   heading: {
     fontSize: 30,
