@@ -11,7 +11,6 @@ class Register extends Component {
       username: "",
       registered: false,
       errormsg: "",
-      loading: false,
       bio: "",
     };
   }
@@ -26,7 +25,7 @@ class Register extends Component {
   }
 
   handleSubmit(email, password, bio, username) {
-    this.setState({ loading: true, errormsg: '' });
+    this.setState({ errormsg: '' });
   
     if (!password) {
       this.setState({
@@ -56,18 +55,18 @@ class Register extends Component {
           })
             .then(() => {
               
-              this.setState({ registered: true, errormsg: '', loading: false });
+              this.setState({ registered: true, errormsg: ''});
               this.props.navigation.navigate('Login')
             });
         }
       })
-      .catch((error) => this.setState({ errormsg: error.message, loading: false }));
+      .catch((error) => this.setState({ errormsg: error.message}));
   }
 
 
 
   render() {
-    const { email, password, username, loading, bio } = this.state;
+    const { email, password, username,  bio } = this.state;
 
     return (
       <View style={styles.container}>
@@ -110,7 +109,6 @@ class Register extends Component {
           <Text style={styles.buttonText}>Registrate</Text>
         </TouchableOpacity>
 
-        {loading && <ActivityIndicator size="large" color="yellow" />}
         {this.state.errormsg && <Text style={styles.error}>{this.state.errormsg} </Text>}
 
 

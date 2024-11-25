@@ -61,7 +61,9 @@ class Login extends Component {
           onPress={() => this.handleSubmit(email, password)}>
           <Text style={styles.buttonText}>Ingresar</Text>
         </TouchableOpacity>
-        {errormsg && <Text>{errormsg}</Text>}
+
+        {errormsg && <Text style={styles.error}>{errormsg}</Text>}
+
         <Text style={styles.paragraph}>¿Aún no tienes una cuenta?</Text>
         <TouchableOpacity
           style={styles.buttonSecondary}
@@ -80,6 +82,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#b3baff',
     minHeight: '100%',
+  },
+  error:{
+    width: '100%',
+    padding: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: 10,
   },
   heading: {
     fontSize: 30,
@@ -140,10 +149,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '600',
   },
-  error: {
-    color: "white",
-    margin: 20,
-  }
 });
 
 export default Login;

@@ -63,9 +63,9 @@ class Profile extends Component {
 
         <UserProfile posts={posts} />
 
-        <View style={styles.containerPost}>
           <Text style={styles.text}>Mis posts</Text>
 
+        <View style={styles.containerPost}>
           {posts.length === 0 ? (
             <Text style={styles.noResults}>Aún no hay publicaciones</Text>
           ) : loading ? (
@@ -75,7 +75,6 @@ class Profile extends Component {
               data={posts}
               keyExtractor={(post) => post.id}
               renderItem={({ item }) => <Post item={item} />}
-              contentContainerStyle={styles.postsList}
             />
           )}
         </View>
@@ -99,13 +98,21 @@ const styles = StyleSheet.create({
     backgroundColor: "#ff91f4",
     padding: 20,
   },
+  postsList:{
+    flex: 1, 
+    width: "%100",
+    flexGrow: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   noResults: {
     fontSize: 16,
     color: 'black',
     marginTop: 20,
   },
   containerPost: {
-    flex: 2,
+    flex: 1,
+    width: "100%",
     justifyContent: 'flex-start',
     alignItems: 'center',
     backgroundColor: "#ff91f4",

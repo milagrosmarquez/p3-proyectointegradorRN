@@ -64,14 +64,8 @@ class UserProfile extends Component {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'flex-start',
-        alignItems: 'center',
-        padding: 20,
-    },
+
     userInfo: {
-        width: '92%',
         flexDirection: 'row',
         padding: 15,
         paddingBottom: 20,
