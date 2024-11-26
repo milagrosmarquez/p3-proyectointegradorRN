@@ -26,7 +26,6 @@ class UserProfile extends Component {
             const user = filteredUsers.length > 0 ? filteredUsers[0].data : {};
 
             this.setState({
-                users: users,
                 user: user,
                 loading: false,
             });
@@ -53,7 +52,7 @@ class UserProfile extends Component {
                             <Text style={styles.userInfoText}>{user.username}</Text>
                             <Text style={styles.userInfoText}>{auth.currentUser.email}</Text>
                             <Text style={styles.bio}>{user.bio}</Text>
-                            <Text style={styles.posts}>Cantidad de posts: {this.props.posts.length} </Text>
+                            <Text style={styles.posts}>Posts: {this.props.posts.length} </Text>
                         </View>
                         </>
                     )}
@@ -64,14 +63,14 @@ class UserProfile extends Component {
 }
 
 const styles = StyleSheet.create({
-
     userInfo: {
         flexDirection: 'row',
         padding: 15,
-        paddingBottom: 20,
+        width: '80%', 
+        paddingBottom: 10,
         paddingTop: 20,
         paddingLeft: 40,
-        paddingRight: 40,
+        paddingRight: 40, 
         backgroundColor: '#171617',
         marginBottom: 30,
         borderRadius: 8,
@@ -82,23 +81,23 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     image: {
-        width: 70,
-        height: 70,
+        width: 60, 
+        height: 60, 
         marginRight: 10,
-        borderRadius: 40,
+        borderRadius: 30,
         alignSelf: 'center',
     },
     textContainer: {
         flex: 1,
     },
     userInfoText: {
-        fontSize: 16,
+        fontSize: 18, 
         marginBottom: 10,
         color: 'white',
         padding: 5,
     },
     text: {
-        fontSize: 20,
+        fontSize: 18, 
         fontWeight: 'bold',
         marginBottom: 10,
         color: 'black',
@@ -106,17 +105,17 @@ const styles = StyleSheet.create({
     },
     bio: {
         backgroundColor: '#fccaf7',
-        padding: 20,
+        padding: 18,
         borderRadius: 8,
         marginTop: 10,
     },
-    posts:{
-        fontSize: 16,
+    posts: {
+        fontSize: 18, 
         marginBottom: 10,
         color: 'white',
         padding: 5,
         paddingTop: 15,
-    }
+    },
 });
 
 export default UserProfile;

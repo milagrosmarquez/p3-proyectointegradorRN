@@ -81,7 +81,7 @@ class Post extends Component {
                             <Text style={styles.button}>Me gusta </Text>
                         </TouchableOpacity>
                     )}
-                    <Text style={styles.likes}>Likes: {cantidad}</Text>
+                    <Text style={styles.likes}>❤️{cantidad}</Text>
                 </View>
                 {loading ? (
                     <ActivityIndicator size="small" color="blue" style={styles.loading} />
@@ -101,10 +101,13 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         width: '100%',
-        padding: 15,
+        paddingBottom: 10,
+        paddingTop: 10,
+        paddingLeft: 40,
+        paddingRight: 40, 
         backgroundColor: 'white',
         borderRadius: 8,
-        marginBottom: 20,
+        marginBottom: 23,
         shadowColor: '#000',
         shadowOpacity: 0.2,
         shadowRadius: 5,
@@ -115,14 +118,14 @@ const styles = StyleSheet.create({
         backgroundColor: '#f2f4f4',
         padding: 20,
         borderRadius: 8,
-        marginTop: 10,
+        marginTop: 5,
         width: '100%',
     },
     info: {
         paddingTop: 20,
         fontSize: 16,
         color: 'black',
-        marginBottom: 8,
+        marginBottom: 5,
         width: '100%',
     },
     buttonDelete: {
@@ -140,12 +143,11 @@ const styles = StyleSheet.create({
     button: {
         paddingVertical: 7,
         paddingHorizontal: 25,
-        backgroundColor: '#a29b08',
+        backgroundColor: '#d5cc00',
         color: 'white',
         fontSize: 16,
         fontWeight: 'bold',
         borderRadius: 25,
-
         marginTop: 10,
         alignSelf: 'flex-start',
         shadowColor: '#000',

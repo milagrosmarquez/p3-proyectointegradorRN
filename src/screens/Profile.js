@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, FlatList, ActivityIndicator } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, FlatList, ActivityIndicator, ScrollView } from 'react-native';
 import { auth, db } from "../firebase/config"
 import UserProfile from '../components/UserProfile/UserProfile';
 import Post from '../components/Post/Post';
@@ -56,36 +56,36 @@ class Profile extends Component {
     const { loading, posts } = this.state;
 
     return (
+      <ScrollView >
+        <View style={styles.containerUser}>
+          <Text style={styles.text}>Mi perfil</Text>
 
-
-      <View style={styles.containerUser}>
-        <Text style={styles.text}>Mi perfil</Text>
-
-        <UserProfile posts={posts} />
+          <UserProfile posts={posts} />
 
           <Text style={styles.text}>Mis posts</Text>
 
-        <View style={styles.containerPost}>
-          {posts.length === 0 ? (
-            <Text style={styles.noResults}>Aún no hay publicaciones</Text>
-          ) : loading ? (
-            <ActivityIndicator size="large" color="yellow" />
-          ) : (
-            <FlatList
-              data={posts}
-              keyExtractor={(post) => post.id}
-              renderItem={({ item }) => <Post item={item} />}
-            />
-          )}
+          <View style={styles.containerPost}>
+            {posts.length === 0 ? (
+              <Text style={styles.noResults}>Aún no hay publicaciones</Text>
+            ) : loading ? (
+              <ActivityIndicator size="large" color="yellow" />
+            ) : (
+              <FlatList
+                data={posts}
+                keyExtractor={(post) => post.id}
+                renderItem={({ item }) => <Post item={item} />}
+              />
+            )}
+          </View>
+
+
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => this.logout()}>
+            <Text style={styles.buttonText}>Salir</Text>
+          </TouchableOpacity>
         </View>
-
-
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => this.logout()}>
-          <Text style={styles.buttonText}>Salir</Text>
-        </TouchableOpacity>
-      </View>
+      </ScrollView>
     );
   }
 }
@@ -98,13 +98,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#ff91f4",
     padding: 20,
   },
-  postsList:{
-    flex: 1, 
-    width: "%100",
-    flexGrow: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   noResults: {
     fontSize: 16,
     color: 'black',
@@ -116,32 +109,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     backgroundColor: "#ff91f4",
-    padding: 20,
-  },
-  userInfo: {
-    width: '100%',
-    flexDirection: 'row',
-    padding: 20,
-    backgroundColor: '#d3aad7',
-    marginBottom: 20,
-    borderRadius: 8,
-    shadowColor: '#000',
-    shadowOpacity: 0.1,
-    shadowRadius: 5,
-    alignItems: 'center',
-  },
-  image: {
-    width: 50,
-    height: 50,
-    marginRight: 10,
-    borderRadius: 25,
-  },
-  textContainer: {
-    flex: 1,
-  },
-  userInfoText: {
-    fontSize: 16,
-    marginBottom: 10,
+    padding: 0,
   },
   text: {
     fontSize: 20,

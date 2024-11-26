@@ -29,7 +29,7 @@ class Register extends Component {
   
     if (!password) {
       this.setState({
-        errormsg: "Completar password "
+        errormsg: "Completar password"
       })
       return;
     }

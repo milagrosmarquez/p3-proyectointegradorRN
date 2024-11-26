@@ -50,7 +50,6 @@ class UserSearch extends Component {
         this.setState({
             filterValue: text,
             filteredUsers: filteredUsers,
-            filterApplied: true,
         });
     };
 
@@ -129,13 +128,6 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: 'white',
         marginBottom: 8,
-    },
-    bio: {
-        backgroundColor: '#eeffa1',
-        padding: 10,
-        borderRadius: 8,
-        marginTop: 5,
-        color: '#333',
     },
 });
 
